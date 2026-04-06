@@ -30,7 +30,7 @@ export default async function handler(req, res) {
         body: JSON.stringify({
           email,
           includeListIds: [7],
-          templateId: 1,
+          templateId: 10,
           redirectionUrl: "https://195093-copy5.cargo.site/danke"
         })
       }
