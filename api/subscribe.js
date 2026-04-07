@@ -31,7 +31,7 @@ export default async function handler(req, res) {
           email,
           includeListIds: [7],
           templateId: 1,
-          redirectionUrl: "https://195093-copy5.cargo.site/danke"
+          redirectionUrl: "https://195093-copy5.cargo.site/edit/M0313394714"
         })
       }
     );
