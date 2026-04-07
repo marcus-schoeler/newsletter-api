@@ -11,13 +11,17 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { email } = req.body ?? {};
-
-  if (!email) {
-    return res.status(400).json({ error: "Email missing" });
-  }
-
   try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ error: "Email missing" });
+    }
+
+    if (!process.env.BREVO_API_KEY) {
+      return res.status(500).json({ error: "Missing API key" });
+    }
+
     const response = await fetch(
       "https://api.brevo.com/v3/contacts/doubleOptinConfirmation",
       {
@@ -31,7 +35,7 @@ export default async function handler(req, res) {
           email,
           includeListIds: [7],
           templateId: 1,
-          redirectionUrl: "redirectionUrl: "https://195093-copy6.cargo.site/?subscribed=true"
+          redirectionUrl: "https://195093-copy6.cargo.site/?subscribed=true"
         })
       }
     );
@@ -40,16 +44,17 @@ export default async function handler(req, res) {
 
     if (!response.ok) {
       return res.status(response.status).json({
-        error: "Brevo request failed",
+        error: "Brevo error",
         details: data
       });
     }
 
     return res.status(200).json({ success: true });
+
   } catch (error) {
     return res.status(500).json({
-      error: "Failed",
-      details: String(error)
+      error: "Server crashed",
+      details: error.message
     });
   }
 }
