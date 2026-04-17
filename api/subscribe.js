@@ -48,7 +48,7 @@ export default async function handler(req, res) {
           email,
           includeListIds: [7],
           templateId: 1,
-          redirectionUrl: "https://195093-copy7.cargo.site/edit/M0313394714"
+          redirectionUrl: "https://marcusschoeler.com/newsletter-confirmed"
         })
       }
     );
@@ -60,7 +60,7 @@ export default async function handler(req, res) {
     }
  
     // Nach Formular-Absenden auf Hinweis-Seite leiten
-    return res.redirect(303, "https://195093-copy7.cargo.site/newsletter-check-email");
+    return res.redirect(303, "https://marcusschoeler.com/newsletter-check-email");
   } catch (error) {
     return res.status(500).send(`Server crashed: ${error.message}`);
   }
